@@ -2,20 +2,29 @@
 
 The below URLs produce the following effects:
 
-curl [dockerContainer]/stats								
 /stats
-											{
-												"unique_count" : XX,
-												"map" : [ { $IP: $REQUEST_COUNT, $IP: $REQUEST_COUNT, etc } ],
-												"statuscodes" : [ { $CODE : $COUNT, $CODE: $COUNT, etc } ],
-												"top_five" : [$MostReferrer, $SecondMostReferrer .. $FifthMostReferrer]
-											}
-/stats/unique_count 				Returns only the number of unique IPs
-/stats/map 							Returns every unique IP along with its number of hits
-/stats/statuscodes				Returns the HTTP Status Code distribution
-/stats/top_five					Returns the top five referer URLs. (Note: Does not sort.)
-/stats/filename					Returns the filename of the log file being analyzed
-/stats/help		 					This documentation
+Returns the following: { "unique_count" : XX, "map" : [ { $IP: $REQUEST_COUNT, $IP: $REQUEST_COUNT, etc } ], "statuscodes" : [ { $CODE : $COUNT, $CODE: $COUNT, etc } ], "top_five" : [$MostReferrer, $SecondMostReferrer .. $FifthMostReferrer] }
+
+/stats/unique_count
+Returns only the number of unique IPs
+
+/stats/map 							
+Returns every unique IP along with its number of hits
+
+/stats/statuscodes				
+Returns the HTTP Status Code distribution
+
+/stats/top_five					
+Returns the top five referer URLs. (Note: Does not sort.)
+
+/stats/filename					
+Returns the filename of the log file being analyzed (for debug/verification purposes)
+
+/stats/help		 					
+An overview of the commands and their results.
+
+
+BUILDING:
 
 Use the Dockerfile to build the container image. 
 From there, be sure to specify the ports and volume to map (e.g., `docker run -p 8000:8000 -v /Users/mshea/works/git/taketwotest/logdir:/mnt [container name]`)
